@@ -1,0 +1,272 @@
+{
+  "info": {
+    "name": "CampusHub – Avance 1 (api-mock)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Importar en Postman o Thunder Client. Requiere npm run api (puerto 3000). Orden sugerido: POST crear -> PUT/PATCH/DELETE sobre el id creado (ajustar el id si no es 9)."
+  },
+  "variable": [
+    {
+      "key": "base",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET listar laboratorios",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/laboratorios",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios"
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET filtrar por sede",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/laboratorios?sede=Lima Sur",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios"
+          ],
+          "query": [
+            {
+              "key": "sede",
+              "value": "Lima Sur"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET buscar (q)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/laboratorios?q=arduino",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "arduino"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET detalle laboratorio",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/laboratorios/1",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "POST crear laboratorio",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base}}/laboratorios",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Lab Z-999\",\n  \"sede\": \"Lima Sur\",\n  \"capacidad\": 20,\n  \"equipos\": [\n    \"PC i5\",\n    \"Proyector\"\n  ],\n  \"estado\": \"disponible\"\n}"
+        }
+      }
+    },
+    {
+      "name": "PUT actualizar laboratorio",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base}}/laboratorios/9",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios",
+            "9"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Lab Z-999\",\n  \"sede\": \"Lima Sur\",\n  \"capacidad\": 25,\n  \"equipos\": [\n    \"PC i5\",\n    \"Proyector\"\n  ],\n  \"estado\": \"disponible\"\n}"
+        }
+      }
+    },
+    {
+      "name": "PATCH cambiar estado (extra)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base}}/laboratorios/9",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios",
+            "9"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"estado\": \"mantenimiento\"\n}"
+        }
+      }
+    },
+    {
+      "name": "DELETE eliminar laboratorio",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/laboratorios/9",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "laboratorios",
+            "9"
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET reservas de un usuario",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/reservas?usuarioId=3",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "reservas"
+          ],
+          "query": [
+            {
+              "key": "usuarioId",
+              "value": "3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "POST crear reserva",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base}}/reservas",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "reservas"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codigo\": \"RES-0021\",\n  \"laboratorioId\": 1,\n  \"usuarioId\": 3,\n  \"fecha\": \"2026-12-01\",\n  \"horaInicio\": \"14:00\",\n  \"horaFin\": \"16:00\",\n  \"motivo\": \"Práctica de Angular\",\n  \"estado\": \"pendiente\",\n  \"creadoEn\": \"2026-11-05T12:00:00Z\"\n}"
+        }
+      }
+    },
+    {
+      "name": "DELETE cancelar reserva",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/reservas/21",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "reservas",
+            "21"
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET login simulado (usuarios?correo=)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/usuarios?correo=admin1@utp.edu.pe",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "usuarios"
+          ],
+          "query": [
+            {
+              "key": "correo",
+              "value": "admin1@utp.edu.pe"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
