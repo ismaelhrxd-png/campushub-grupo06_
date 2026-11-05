@@ -50,23 +50,34 @@ npm run api
 ```
 
 Endpoints del avance 1: `GET/POST /laboratorios`, `GET/PUT/DELETE /laboratorios/:id`,
-`GET/POST /reservas`, `DELETE /reservas/:id`.
+`GET/POST /reservas`, `DELETE /reservas/:id` (más `PATCH` y `GET /usuarios?correo=` que se usan después).
+
+Colección de pruebas: `api-mock/CampusHub.postman_collection.json` (se importa en Thunder Client o Postman;
+trae GET, POST, PUT, PATCH y DELETE).
 
 Usuarios de prueba: `admin1@utp.edu.pe` / `admin123` y `u20231234@utp.edu.pe` / `est123`.
 
-### angular-admin (puerto 4200) – pendiente
+### angular-admin (puerto 4200)
+
+Necesita el API corriendo (`npm run api` en otra terminal).
 
 ```bash
 cd angular-admin
 npm install
-npm start
+npm start        # copia core-js a src/core (prestart) y levanta ng serve
 ```
+
+Rutas: `/laboratorios`, `/laboratorios/nuevo`, `/laboratorios/:id/editar`, `/laboratorios/:id` y `/reservas`.
+
+Elementos de Angular usados: servicios con `HttpClient` e interfaces TypeScript, formulario reactivo con
+validadores (`required`, `min/max` y un validador propio con expresión regular de core-js), `@for`/`@if`,
+`ngClass`, pipe `estadoReserva`, directiva `appResaltar` y Bootstrap.
 
 ## Avances
 
 | Avance | Semana | Estado | Etiqueta |
 |---|---|---|---|
-| 1 – core-js, API simulada y panel Angular | 13 | En curso (core-js y api-mock listos) | `avance-1` |
+| 1 – core-js, API simulada y panel Angular | 13 | Listo para sustentar | `avance-1` |
 | 2 – Portal React con Hooks | 14 | Pendiente | `avance-2` |
 | 3 – React + API (Fetch, Axios, Alova) | 15 | Pendiente | `avance-3` |
 | 4 – Kiosko Vue y Next.js SSR | 16 | Pendiente | `avance-4` |
