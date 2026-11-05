@@ -6,6 +6,7 @@ import {
   esCodigoAlumno,
   esHora,
   esFecha,
+  esNombreLaboratorio,
   validarReserva,
   validarLaboratorio,
 } from './validadores.js';
@@ -102,4 +103,10 @@ test('generadorCodigos usa closure y padStart', () => {
   assert.equal(siguiente(), 'RES-0001');
   assert.equal(siguiente(), 'RES-0002');
   assert.equal(generadorCodigos()(), 'RES-0001'); // cada generador tiene su propio contador
+});
+
+test('nombre de laboratorio: formato "Lab A-301"', () => {
+  assert.equal(esNombreLaboratorio('Lab A-301'), true);
+  assert.equal(esNombreLaboratorio('Lab a-301'), false);
+  assert.equal(esNombreLaboratorio('Laboratorio 301'), false);
 });

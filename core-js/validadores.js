@@ -11,6 +11,9 @@ export const esCodigoAlumno = (codigo) => /^U\d{8}$/.test(codigo);
 // Código de administrador: la letra A seguida de 8 dígitos (ej. A00000001)
 export const esCodigoAdmin = (codigo) => /^A\d{8}$/.test(codigo);
 
+// Nombre de laboratorio: "Lab" + letra de pabellón + guion + 3 dígitos (ej. Lab A-301)
+export const esNombreLaboratorio = (nombre) => /^Lab [A-Z]-\d{3}$/.test(nombre);
+
 // Hora HH:mm en formato de 24 horas
 export const esHora = (hora) => /^([01]\d|2[0-3]):[0-5]\d$/.test(hora);
 
