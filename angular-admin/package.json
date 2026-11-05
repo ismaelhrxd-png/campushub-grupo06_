@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "sync-core": "node -e \"require('fs').cpSync('../core-js','src/core',{recursive:true})\"",
+    "prestart": "npm run sync-core",
     "start": "ng serve",
+    "prebuild": "npm run sync-core",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "sync-core": "node -e \"require('fs').cpSync('../core-js','src/core',{recursive:true})\""
+    "pretest": "npm run sync-core",
+    "test": "ng test"
   },
   "private": true,
   "packageManager": "npm@11.20.0",

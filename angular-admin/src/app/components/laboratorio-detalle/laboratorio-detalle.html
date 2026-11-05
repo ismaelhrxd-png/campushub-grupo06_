@@ -1,0 +1,28 @@
+<a routerLink="/laboratorios" class="btn btn-link ps-0">← Volver a la lista</a>
+
+@if (error()) {
+  <div class="alert alert-danger">{{ error() }}</div>
+} @else if (lab(); as l) {
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{ l.nombre }}</h2>
+      <p class="text-muted">{{ l.sede }}</p>
+      <dl class="row mb-3">
+        <dt class="col-sm-3">Capacidad</dt><dd class="col-sm-9">{{ l.capacidad }} personas</dd>
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">
+          <span class="badge" [class.text-bg-success]="l.estado === 'disponible'"
+                [class.text-bg-warning]="l.estado === 'mantenimiento'">{{ l.estado }}</span>
+        </dd>
+        <dt class="col-sm-3">Equipos</dt>
+        <dd class="col-sm-9">
+          @for (e of l.equipos; track e) { <span class="badge text-bg-light border me-1">{{ e }}</span> }
+          @empty { <span class="text-muted">Sin equipos registrados</span> }
+        </dd>
+      </dl>
+      <a class="btn btn-primary" [routerLink]="['/laboratorios', l.id, 'editar']">Editar</a>
+    </div>
+  </div>
+} @else {
+  <div class="text-center py-4"><div class="spinner-border text-primary"></div></div>
+}

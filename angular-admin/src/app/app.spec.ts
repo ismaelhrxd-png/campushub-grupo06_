@@ -1,24 +1,35 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { EstadoReservaPipe } from './pipes/estado-reserva.pipe';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-    })
-      .compileComponents();
+      providers: [provideRouter([])],
+    }).compileComponents();
   });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the navbar brand', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-admin');
+    expect(compiled.querySelector('.navbar-brand')?.textContent).toContain('CampusHub');
+  });
+});
+
+describe('EstadoReservaPipe', () => {
+  const pipe = new EstadoReservaPipe();
+
+  it('muestra texto con icono según el estado', () => {
+    expect(pipe.transform('pendiente')).toBe('⏳ Pendiente');
+    expect(pipe.transform('aprobada')).toBe('✅ Aprobada');
+    expect(pipe.transform('rechazada')).toBe('❌ Rechazada');
   });
 });

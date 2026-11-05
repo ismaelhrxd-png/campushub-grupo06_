@@ -1,0 +1,51 @@
+<h2>{{ editando ? 'Editar laboratorio' : 'Nuevo laboratorio' }}</h2>
+
+@if (error()) { <div class="alert alert-danger">{{ error() }}</div> }
+
+<form [formGroup]="form" (ngSubmit)="guardar()" novalidate class="row g-3" style="max-width: 720px">
+  <div class="col-md-6">
+    <label class="form-label" for="nombre">Nombre</label>
+    <input id="nombre" class="form-control" formControlName="nombre" placeholder="Lab A-301"
+           [class.is-invalid]="invalido('nombre')" />
+    @if (invalido('nombre')) {
+      <div class="invalid-feedback">
+        @if (form.controls.nombre.errors?.['required']) { El nombre es obligatorio }
+        @else if (form.controls.nombre.errors?.['nombreLaboratorio']) { Formato inválido: use «Lab A-301» (Lab + letra + guion + 3 dígitos) }
+      </div>
+    }
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label" for="sede">Sede</label>
+    <input id="sede" class="form-control" formControlName="sede" placeholder="Lima Centro"
+           [class.is-invalid]="invalido('sede')" />
+    @if (invalido('sede')) { <div class="invalid-feedback">La sede es obligatoria (mínimo 3 caracteres)</div> }
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label" for="capacidad">Capacidad</label>
+    <input id="capacidad" type="number" class="form-control" formControlName="capacidad"
+           [class.is-invalid]="invalido('capacidad')" />
+    @if (invalido('capacidad')) { <div class="invalid-feedback">La capacidad debe estar entre 1 y 60</div> }
+  </div>
+
+  <div class="col-md-8">
+    <label class="form-label" for="estado">Estado</label>
+    <select id="estado" class="form-select" formControlName="estado">
+      <option value="disponible">Disponible</option>
+      <option value="mantenimiento">Mantenimiento</option>
+    </select>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label" for="equipos">Equipos <small class="text-muted">(separados por coma)</small></label>
+    <input id="equipos" class="form-control" formControlName="equipos" placeholder="PC i7, Proyector" />
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-primary me-2" type="submit" [disabled]="guardando()">
+      {{ guardando() ? 'Guardando…' : 'Guardar' }}
+    </button>
+    <a class="btn btn-outline-secondary" routerLink="/laboratorios">Cancelar</a>
+  </div>
+</form>
